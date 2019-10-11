@@ -14,6 +14,7 @@ public class JumpAndDuck : MonoBehaviour {
 	private float jumpVelocity = 0f;
 	private float gravity = 144f;
 	private Vector3 startVector;
+	public bool inverted = false;
 
 	void Start() {
 		animator = GetComponent<Animator>();
@@ -42,6 +43,10 @@ public class JumpAndDuck : MonoBehaviour {
 				jumpVelocity = 20;
 			}
 		}
+		if (Input.GetButtonDown("Invert")) {
+			inverted = !inverted;
+			invert();
+		}
 	}
 
 	void OnCollisionEnter2D(Collision2D collision) {
@@ -64,7 +69,6 @@ public class JumpAndDuck : MonoBehaviour {
 		if (!grounded) {
 			return;
 		}
-
 		stand();
 		if (jumpAudioSource && jumpAudioClip) {
 			jumpAudioSource.PlayOneShot(jumpAudioClip, 1);
@@ -73,7 +77,6 @@ public class JumpAndDuck : MonoBehaviour {
 		jumpVelocity = 40f + level.mainSpeed / 10f;
 		grounded = false;
 		animator.SetBool("jumping", true);
-
 	}
 
 	void duck() {
@@ -85,6 +88,14 @@ public class JumpAndDuck : MonoBehaviour {
 		duckingCollider.enabled = true;
 		ducking = true;
 		animator.SetBool("ducking", true);
+	}
+
+	void invert() {
+		GameObject dinosaur = GameObject.Find("Dinosaur");
+		var x = dinosaur.transform.localScale.x;
+		var y = dinosaur.transform.localScale.y;
+		var z = dinosaur.transform.localScale.z;
+		dinosaur.transform.localScale = new Vector3(x, -y, z);
 	}
 
 	void stand() {
