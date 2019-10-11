@@ -7,7 +7,7 @@ public class HitObstacles : MonoBehaviour {
 	public AudioClip audioClip = null;
 	public GameObject restart = null;
 	private Animator animator;
-	private bool stop = false;
+	public static bool stop = false;
 	private Vector3 restartStartPosition = Vector3.zero;
 
 	void Start() {
@@ -22,6 +22,12 @@ public class HitObstacles : MonoBehaviour {
 		}
 		SceneManager.LoadScene("Game");
 		Time.timeScale = 1;
+		SceneManager.sceneLoaded += OnGameRestarted;
+	}
+
+	void OnGameRestarted(Scene scene, LoadSceneMode mode)
+	{
+		stop = false;
 	}
 
 	void OnTriggerEnter2D(Collider2D collider) {
