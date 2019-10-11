@@ -43,7 +43,7 @@ public class JumpAndDuck : MonoBehaviour
                 handleUninverteDino();
             }
         }
-		if (Input.GetButtonDown("Invert")) {
+		if (Input.GetButtonDown("Invert") && !HitObstacles.stop) {
 			inverted = !inverted;
 			invert();
 		}
