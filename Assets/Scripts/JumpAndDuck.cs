@@ -16,24 +16,40 @@ public class JumpAndDuck : MonoBehaviour
     private float gravity = 144f;
     private Vector3 startVector;
     public bool inverted = false;
+    private float dinoStartLoc_y;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         standingCollider.enabled = true;
         duckingCollider.enabled = false;
+        dinoStartLoc_y = transform.position.y;
     }
 
-	void Update() {
-		if (grounded) {
-			if (Input.GetButton("Jump") || Input.GetAxis("Vertical") > 0) {
-				jump();
-			} else if (Input.GetAxis("Vertical") < 0) {
-				duck();
-			} else {
-				stand();
-			}
-		} else {
+    void Update()
+    {
+        if (Input.GetButtonDown("Invert") && !HitObstacles.stop)
+        {
+            inverted = !inverted;
+            invert();
+        }
+        if (grounded)
+        {
+            if (Input.GetButton("Jump") || Input.GetAxis("Vertical") > 0)
+            {
+                jump();
+            }
+            else if (Input.GetAxis("Vertical") < 0)
+            {
+                duck();
+            }
+            else
+            {
+                stand();
+            }
+        }
+        else
+        {
             if (inverted)
             {
                 handleInverteDino();
@@ -43,11 +59,8 @@ public class JumpAndDuck : MonoBehaviour
                 handleUninverteDino();
             }
         }
-		if (Input.GetButtonDown("Invert") && !HitObstacles.stop) {
-			inverted = !inverted;
-			invert();
-		}
-	}
+
+    }
     private void handleInverteDino()
     {
         transform.position -= jumpVelocity * Vector3.up * Time.deltaTime;
@@ -83,13 +96,15 @@ public class JumpAndDuck : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision) {
-		if (collision.gameObject == ground) {
-			grounded = true;
-			transform.position = startVector;
-			animator.SetBool("jumping", false);
-		}
-	}
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject == ground)
+        {
+            grounded = true;
+            transform.position = startVector;
+            animator.SetBool("jumping", false);
+        }
+    }
 
 
 
@@ -134,11 +149,15 @@ public class JumpAndDuck : MonoBehaviour
 
     void invert()
     {
-        GameObject dinosaur = GameObject.Find("Dinosaur");
-        var x = dinosaur.transform.localScale.x;
-        var y = dinosaur.transform.localScale.y;
-        var z = dinosaur.transform.localScale.z;
-        dinosaur.transform.localScale = new Vector3(x, -y, z);
+        var x = transform.localScale.x;
+        var y = transform.localScale.y;
+        var z = transform.localScale.z;
+        transform.localScale = new Vector3(x, -y, z);
+
+        var loc_x = transform.position.x;
+        var loc_y = dinoStartLoc_y - (transform.position.y - dinoStartLoc_y);
+        var loc_z = transform.position.z;
+        transform.position = new Vector3(loc_x, loc_y, loc_z);
     }
 
     void stand()
