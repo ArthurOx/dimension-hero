@@ -43,7 +43,7 @@ public class SpawnObstacles : MonoBehaviour
         obstacle.GetComponent<MoveRelatively>().level = level;
         obstacle.GetComponent<DestroyOnLeftEdge>().ground = gameObject;
 
-        float minimumSpawnDistance = obstacle.GetComponent<Collider2D>().bounds.size.x * level.mainSpeed / 4.0f + obstacle.GetComponent<ObstacleStuff>().minGap * 0.6f;
+        float minimumSpawnDistance = obstacle.GetComponent<Collider2D>().bounds.size.x * level.mainSpeed / 8.0f + obstacle.GetComponent<ObstacleStuff>().minGap * 0.2f;
         spawnAt = minimumSpawnDistance * (1 + Random.value * 0.5f);
         distance = 0f;
     }
