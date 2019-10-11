@@ -32,24 +32,56 @@ public class JumpAndDuck : MonoBehaviour {
 				stand();
 			}
 		} else {
-			transform.position += jumpVelocity * Vector3.up * Time.deltaTime;
-			jumpVelocity -= gravity * Time.deltaTime;
-
-			if (transform.position.y < ground.transform.position.y) {
-				grounded = true;
-				transform.position = startVector;
-				animator.SetBool("jumping", false);
-			} else if (3 < transform.position.y && 20 < jumpVelocity) {
-				jumpVelocity = 20;
-			}
-		}
+            if (inverted)
+            {
+                handleInverteDino();
+            }
+            else
+            {
+                handleUninverteDino();
+            }
+        }
 		if (Input.GetButtonDown("Invert")) {
 			inverted = !inverted;
 			invert();
 		}
 	}
+    private void handleInverteDino()
+    {
+        transform.position -= jumpVelocity * Vector3.up * Time.deltaTime;
+        jumpVelocity -= gravity * Time.deltaTime;
 
-	void OnCollisionEnter2D(Collision2D collision) {
+        if (transform.position.y > ground.transform.position.y)
+        {
+            grounded = true;
+            transform.position = startVector;
+            animator.SetBool("jumping", false);
+        }
+        else if (3 < transform.position.y && 20 < jumpVelocity)
+        {
+            jumpVelocity = 20;
+        }
+    }
+
+
+    private void handleUninverteDino()
+    {
+        transform.position += jumpVelocity * Vector3.up * Time.deltaTime;
+        jumpVelocity -= gravity * Time.deltaTime;
+
+        if (transform.position.y < ground.transform.position.y)
+        {
+            grounded = true;
+            transform.position = startVector;
+            animator.SetBool("jumping", false);
+        }
+        else if (3 < transform.position.y && 20 < jumpVelocity)
+        {
+            jumpVelocity = 20;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision) {
 		if (collision.gameObject == ground) {
 			grounded = true;
 			transform.position = startVector;
