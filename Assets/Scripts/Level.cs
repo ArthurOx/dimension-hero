@@ -7,8 +7,9 @@ public class Level : MonoBehaviour {
 	public float maxSpeed = 10;
 	public float acceleration = 10;
 	private float distanceRan = 0f;
+    public GameObject[] collectables;
 
-	void Start () {
+    void Start () {
 		distanceRan = 0f;
 	}
 	
