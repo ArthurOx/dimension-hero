@@ -46,6 +46,7 @@ public class HitObstacles : MonoBehaviour
         if (collider.gameObject.tag == "Collectable")
         {
             Level.coins += 1;
+            Destroy(collider.gameObject);
         }
     }
 
