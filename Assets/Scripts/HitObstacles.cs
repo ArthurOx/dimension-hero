@@ -82,6 +82,7 @@ public class HitObstacles : MonoBehaviour
     {
         livesCount--;
         changeHeartsSprite(livesCount);
+        audioSource.PlayOneShot(audioClip, 1);
     }
     void changeHeartsSprite(int numOfLives)
     {
