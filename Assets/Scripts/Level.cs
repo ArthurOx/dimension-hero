@@ -8,9 +8,11 @@ public class Level : MonoBehaviour {
 	public float acceleration = 10;
 	private float distanceRan = 0f;
     public GameObject[] collectables;
+    public static int coins = 0;
 
     void Start () {
 		distanceRan = 0f;
+        coins = 0;
 	}
 	
 	void Update () {

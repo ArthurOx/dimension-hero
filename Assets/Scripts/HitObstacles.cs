@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using System;
 
 public class HitObstacles : MonoBehaviour
 {
@@ -38,6 +39,18 @@ public class HitObstacles : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
+        if (collider.gameObject.tag == "Obstacle")
+        {
+            handleCollisionWithObsacle(collider);
+        }
+        if (collider.gameObject.tag == "Collectable")
+        {
+            Level.coins += 1;
+        }
+    }
+
+    private void handleCollisionWithObsacle(Collider2D collider)
+    {
         removeLife();
         Debug.Log(livesCount);
         if (livesCount == 0)
@@ -58,6 +71,7 @@ public class HitObstacles : MonoBehaviour
             otherAnimator.SetTrigger("hit");
         }
     }
+
     void removeLife()
     {
         livesCount--;
@@ -65,7 +79,7 @@ public class HitObstacles : MonoBehaviour
     }
     void changeHeartsSprite(int numOfLives)
     {
-        Object[] sprites = Resources.LoadAll<Sprite> ("heart sheet");
+        Sprite[] sprites = Resources.LoadAll<Sprite> ("heart sheet");
         Debug.Log("sprlgth " + sprites.Length);
         switch (numOfLives)
         {

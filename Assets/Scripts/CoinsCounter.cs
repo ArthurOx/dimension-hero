@@ -1,9 +1,10 @@
-﻿    using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
-public class Scores : MonoBehaviour {
-	public Level level = null;
+public class CoinsCounter : MonoBehaviour
+{
+	public Level Level = null;
 	public AudioSource audioSource = null;
 	public AudioClip audioClip = null;
 	public Number score = null;
@@ -16,31 +17,35 @@ public class Scores : MonoBehaviour {
 	private int iterated = 0;
 	private static float highestScore = 0;
 
-	void Start() {
+	void Start()
+	{
 		flashScore.transform.position = score.transform.position + Vector3.up * 50;
 	}
 
-	void Update() {
-        int points = (int)level.getDistance() + Level.coins * 100;
-        if (audioSource && audioClip && (int) (points / 100) != lastHundred) {
-			lastHundred = (int) (points / 100);
+	void Update()
+	{
+		if (audioSource && audioClip && (int)(Level.coins / 100) != lastHundred)
+		{
+			lastHundred = (int)(Level.coins / 100);
 			flashScore.Value = lastHundred * 100;
 			StartCoroutine(FlashScore());
 		}
-		score.Value = (int) points;
-		highScore.Value = (int) highestScore;
+		score.Value = (int)Level.coins;
+		highScore.Value = (int)highestScore;
 	}
 
-	void Awake() {
-		highScore.Value = (int) highestScore;
+	void Awake()
+	{
+		highScore.Value = (int)highestScore;
 	}
 
-	void OnDestroy() {
-        int points = (int)level.getDistance() + Level.coins * 100;
-        highestScore = Mathf.Max(points, highestScore);
+	void OnDestroy()
+	{
+		highestScore = Mathf.Max(Level.coins, highestScore);
 	}
 
-	IEnumerator FlashScore() {
+	IEnumerator FlashScore()
+	{
 		scoreStartPosition = score.transform.position;
 		score.transform.position = scoreStartPosition + Vector3.up * 50;
 		iterated = 0;
@@ -48,15 +53,20 @@ public class Scores : MonoBehaviour {
 		return FlashScore(false);
 	}
 
-	IEnumerator FlashScore(bool showScore) {
+	IEnumerator FlashScore(bool showScore)
+	{
 		flashScore.transform.position = scoreStartPosition + (showScore ? Vector3.zero : Vector3.up * 50);
-		if (showScore) {
+		if (showScore)
+		{
 			iterated++;
 		}
-		if (iterated >= flashIterations) {
+		if (iterated >= flashIterations)
+		{
 			score.transform.position = scoreStartPosition;
 			flashScore.transform.position = scoreStartPosition + Vector3.up * 50;
-		} else {
+		}
+		else
+		{
 			yield return new WaitForSeconds(flashDuration);
 			StartCoroutine(FlashScore(!showScore));
 		}

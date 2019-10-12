@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\AnimateTexture.cs" />
+    <Compile Include="Assets\Scripts\CoinsCounter.cs" />
     <Compile Include="Assets\Scripts\DestroyOnLeftEdge.cs" />
     <Compile Include="Assets\Scripts\DoAnimationTrigger.cs" />
     <Compile Include="Assets\Scripts\HitObstacles.cs" />
