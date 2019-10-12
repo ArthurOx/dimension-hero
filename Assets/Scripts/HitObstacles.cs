@@ -48,8 +48,13 @@ public class HitObstacles : MonoBehaviour
             Level.coins += 1;
             Destroy(collider.gameObject);
         }
+        if (collider.gameObject.tag == "Life")
+        {
+            livesCount = Math.Min(livesCount+1, 2);
+            changeHeartsSprite(livesCount);
+            Destroy(collider.gameObject);
+        }
     }
-
     private void handleCollisionWithObsacle(Collider2D collider)
     {
         removeLife();
@@ -77,6 +82,7 @@ public class HitObstacles : MonoBehaviour
     {
         livesCount--;
         changeHeartsSprite(livesCount);
+        audioSource.PlayOneShot(audioClip, 1);
     }
     void changeHeartsSprite(int numOfLives)
     {
