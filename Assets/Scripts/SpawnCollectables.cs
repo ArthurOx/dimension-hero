@@ -28,12 +28,14 @@ public class SpawnCollectables : MonoBehaviour
     private void SpawnCollectable()
     {
         System.Random ran = new System.Random();
-        int nextCollectable = ran.Next(0, 100) > 50 ? 1 : 0;
+        int nextCollectable = ran.Next(0, 100) > 95 ? 1 : 0;
 
         GameObject collectables = (GameObject)Instantiate(level.collectables[nextCollectable]);
 
-        collectables.transform.position = new Vector3(transform.localScale.x / 2, transform.position.y + RandomYAxisPosition(), 0);
-        collectables.transform.localScale = new Vector3(collectables.transform.localScale.x, collectables.transform.localScale.y, collectables.transform.localScale.z);
+        int randomNum = RandomYAxisPosition();
+        int signOfrandomNumber = randomNum > 0 ? 1 : -1;
+        collectables.transform.position = new Vector3(transform.localScale.x / 2, transform.position.y + randomNum, 0);
+        collectables.transform.localScale = new Vector3(collectables.transform.localScale.x, signOfrandomNumber * collectables.transform.localScale.y, collectables.transform.localScale.z);
         collectables.GetComponent<MoveRelatively>().level = level;
         collectables.GetComponent<DestroyOnLeftEdge>().ground = gameObject;
 
