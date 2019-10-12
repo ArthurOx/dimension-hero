@@ -37,8 +37,11 @@ public class SpawnObstacles : MonoBehaviour
         obstacleHistoryIndex = (obstacleHistoryIndex + 1) % 2;
 
         GameObject obstacle = (GameObject)Instantiate(level.obstacles[obstacleIndex]);
-
-        obstacle.transform.position = new Vector3(transform.localScale.x / 2, transform.position.y, 0);
+        float posY = transform.position.y;
+        // if(obstacle.name.Equals("ColumnOne(Clone)")) {
+        //     posY = -0.66f;
+        // }
+        obstacle.transform.position = new Vector3(transform.localScale.x / 2, posY, 0);
         obstacle.transform.localScale = new Vector3(obstacle.transform.localScale.x, RandomSide() * obstacle.transform.localScale.y, obstacle.transform.localScale.z);
         obstacle.GetComponent<MoveRelatively>().level = level;
         obstacle.GetComponent<DestroyOnLeftEdge>().ground = gameObject;
