@@ -149,6 +149,7 @@ public class JumpAndDuck : MonoBehaviour
 
     void invert()
     {
+        jumpAudioSource.PlayOneShot(jumpAudioClip, 1);
         var x = transform.localScale.x;
         var y = transform.localScale.y;
         var z = transform.localScale.z;
