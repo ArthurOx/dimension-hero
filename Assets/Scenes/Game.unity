@@ -358,7 +358,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 11.269604
+  orthographic size: 11.226608
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -610,6 +610,8 @@ MonoBehaviour:
   obstacles:
   - {fileID: 1000011222861970, guid: 91cea3fb6b7ec4dbd9a9b63f222a8efe, type: 3}
   - {fileID: 4337814558807984356, guid: 290e904d942e60449aab4c272f1d0ab0, type: 3}
+  - {fileID: 1000011222861970, guid: adc8e07b814204562ada1621a0acf76a, type: 3}
+  - {fileID: 1000011222861970, guid: e54927acff4514badb397e5feffa77e9, type: 3}
   mainSpeed: 24
   maxSpeed: 52
   acceleration: 0.004
