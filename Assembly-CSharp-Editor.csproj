@@ -77,7 +77,6 @@
     <Compile Include="Assets\Editor\ImageEffects\SunShaftsEditor.cs" />
     <Compile Include="Assets\Editor\ImageEffects\TonemappingEditor.cs" />
     <Compile Include="Assets\Editor\ImageEffects\VignetteAndChromaticAberrationEditor.cs" />
-    <Compile Include="Assets\VSCode\Plugins\Editor\VSCode.cs" />
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>/Users/user/Downloads/dinosaur-game/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>
