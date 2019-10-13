@@ -41,8 +41,14 @@ public class SpawnObstacles : MonoBehaviour
         // if(obstacle.name.Equals("ColumnOne(Clone)")) {
         //     posY = -0.66f;
         // }
+        
         obstacle.transform.position = new Vector3(transform.localScale.x / 2, posY, 0);
-        obstacle.transform.localScale = new Vector3(obstacle.transform.localScale.x, RandomSide() * obstacle.transform.localScale.y, obstacle.transform.localScale.z);
+        if(obstacle.name.Equals("TrickyObstacle(Clone)")) {
+            obstacle.transform.localScale = new Vector3(RandomSide() * obstacle.transform.localScale.x, obstacle.transform.localScale.y, obstacle.transform.localScale.z);
+        } else {
+            obstacle.transform.localScale = new Vector3(obstacle.transform.localScale.x, RandomSide() * obstacle.transform.localScale.y, obstacle.transform.localScale.z);
+        }
+        
         obstacle.GetComponent<MoveRelatively>().level = level;
         obstacle.GetComponent<DestroyOnLeftEdge>().ground = gameObject;
 
